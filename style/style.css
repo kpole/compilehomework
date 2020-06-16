@@ -1,8 +1,5 @@
-* {
-    margin:0;
-    padding: 0;
-}
 body{
+    margin: 0;
     font-family: sans-serif;
 }
 
@@ -49,15 +46,15 @@ button{
     margin: 0.25em 0;
 }
 
+.container:empty{
+    display: none;
+}
+
 textarea, .container{
     box-sizing: border-box;
     width: 100%;
     overflow: auto;
     font-family: monospace;
-}
-
-.container :empty{
-    display: none;
 }
 
 textarea, 
@@ -68,7 +65,13 @@ td{
 }
 
 textarea {
-    height: 20em;
+    padding: 5px;
+    font-size: 18px;
+    height: 10em;
+}
+
+textarea:focus{
+    border: 1px solid #497fd6;
 }
 
 .code-container {
@@ -78,6 +81,11 @@ textarea {
 .code-container pre{
     margin: 0.25em;
     line-height: 1.25;
+}
+
+pre {
+    font-family: monospace,monospace;
+    font-size: 1em;
 }
 
 table{
@@ -97,6 +105,10 @@ th{
 
 #parse-steps-container td:nth-child(2){
     text-align: right;
+}
+
+#parse-steps-container td{
+    padding: 5px;
 }
 
 th.table-actions{
@@ -141,4 +153,42 @@ td.error {
 
 .end-marker {
     color: purple !important;
+}
+
+i {
+    display: inline-block;
+    min-width: 3em;
+    text-align: right;
+    color: gray;
+}
+
+b {
+    font-weight: normal;
+    background-color: #eee;
+    padding: 0 0.15em;
+    margin: 0 0.15em;
+}
+
+button{ margin:10px; height:30px;}
+
+button 
+{
+    text-decoration:none;
+    background:#244a7e;
+    color:#f2f2f2;
+    padding: 5px 15px 5px 15px;
+    font-size:12px;
+    font-family: 微软雅黑,宋体,Arial,Helvetica,Verdana,sans-serif;
+    font-weight:bold;
+    border-radius:5px;
+    
+    /* -webkit-transition:all linear 0.30s;
+    -moz-transition:all linear 0.30s; */
+    transition:all linear 0.30s;
+}
+
+button:hover { background:#497fd6; }
+
+ul {
+    margin: 10px;
 }

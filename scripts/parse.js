@@ -91,10 +91,10 @@ function getSymbols(){
     Nonterminal.forEach(function(value, index, array){
         NT_productions[value] = new Array();
     })
-    console.log("终结符");
-    console.log(Terminal);
-    console.log("非终结符");
-    console.log(Nonterminal);
+    // console.log("终结符");
+    // console.log(Terminal);
+    // console.log("非终结符");
+    // console.log(Nonterminal);
 }
 
 // 2. 得到产生式
@@ -264,7 +264,7 @@ function goto(I, X){
     }
     // console.log(I);
     // console.log(X);
-    console.log(J);
+    // console.log(J);
     return closure(J);
 }
 
@@ -293,7 +293,7 @@ function getItems(){
                 q.push(nextId);
                 items.push(nextItems);
             }
-            console.log(id + " " + ch + " " + nextId);
+            // console.log(id + " " + ch + " " + nextId);
             addEdge(id, nextId, ch);
         }
     }
@@ -315,7 +315,7 @@ function getParsingTable(){
             }
         }
         for(let item of items[i]){
-            console.log(item);
+            // console.log(item);
             if(item.pos == productions[item.production_id].right.length) { // 规约项目
                 for(let j=0; j < item.lookahead.length; j++){
                     let ch = item.lookahead[j];
@@ -336,8 +336,8 @@ function getParsingTable(){
             }
         }
     }
-    console.log(actions);
-    console.log(trans);
+    // console.log(actions);
+    // console.log(trans);
 }
 // 分析过程
 function stackToString(stack){
@@ -395,4 +395,33 @@ function analysis(str){
         ]);
     }
     return res;
+}
+
+function getDepth(){
+    let depth = new Array(items.length);
+    let deg = new Array(items.length);
+    let queue = new Array();
+    for(let i=0;i<depth.length;i++) depth[i] = -1,deg[i] = 0;
+    for(let i=0;i<depth.length;i++){
+        if(edges[i] != undefined)
+        for(let item of edges[i]){
+            if(item.ver != i)
+                deg[item.ver] ++;
+        }
+    }
+    depth[0] = 0;
+    queue.push(0);
+    // console.log(edges);
+    while(queue.length){
+        let x = queue.shift();
+        if(edges[x] == undefined) continue;
+        for(let item of edges[x]){ 
+            if(item.ver == x) continue;
+            if(--deg[item.ver] == 0){
+                depth[item.ver] = depth[x] + 1;
+                queue.push(item.ver);
+            }
+        }
+    }
+    return depth;
 }
