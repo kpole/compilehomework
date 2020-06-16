@@ -1,0 +1,144 @@
+* {
+    margin:0;
+    padding: 0;
+}
+body{
+    font-family: sans-serif;
+}
+
+header,
+footer {
+  background-color: #223;
+  padding: 0.5em;
+  text-align: center;
+}
+
+header {
+    color: #fff;
+}
+
+footer {
+    color: #ccc;
+}
+
+footer a{
+    color: inherit;
+    text-decoration: none;
+}
+
+footer a:focus,
+footer a:hover{
+    color: #fff;
+}
+
+main {
+    margin: 0.5em;
+}
+
+main h2,
+main h3{
+    background-color: #eee;
+    padding: 0.25em;
+}
+
+main h2{
+    border-bottom: 2px solid #233;
+}
+
+button{
+    margin: 0.25em 0;
+}
+
+textarea, .container{
+    box-sizing: border-box;
+    width: 100%;
+    overflow: auto;
+    font-family: monospace;
+}
+
+.container :empty{
+    display: none;
+}
+
+textarea, 
+.code-container,
+th,
+td{
+    border: 1px solid #aab;
+}
+
+textarea {
+    height: 20em;
+}
+
+.code-container {
+    max-height: 40em;
+}
+
+.code-container pre{
+    margin: 0.25em;
+    line-height: 1.25;
+}
+
+table{
+    box-sizing: border-box;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th{
+    background-color: #eee;
+    text-align: center;
+}
+
+#parse-table-container td{
+    text-align: center;
+}
+
+#parse-steps-container td:nth-child(2){
+    text-align: right;
+}
+
+th.table-actions{
+    color: red;
+}
+
+th.table-trans{
+    color: blue;
+}
+
+td.accept {
+    background-color: #dfd;
+}
+
+td.shift {
+    background-color: #cdf;
+}
+
+td.reduce {
+    background-color: #dcf;
+}
+
+td.conflict {
+    background-color: #fdd;
+}
+
+td.error {
+    background-color: #ffd;
+}
+
+.start-symbol {
+    color: green;
+}
+
+.non-terminal{
+    color:blue;
+}
+
+.terminal{
+    color: red;
+}
+
+.end-marker {
+    color: purple !important;
+}

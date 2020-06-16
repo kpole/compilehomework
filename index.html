@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script type="text/javascript" src="scripts/parse.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+    <title>LR(1)</title>
+</head>
+<body>
+    <header>
+        <h1>LR(1) 文法分析器演示</h1>
+        <p>创建一个LR(1)文法，并观察它是如何工作的</p>
+    </header>
+    <main>
+        <section>
+            <h2>文法</h2>
+            <p>如何编写文法：</p>
+            <ul>
+              <li>第一个符号必须是开始符</li>
+              <li>产生式左部和右部之间使用"->"隔开，'ε'使用'@'代替</li>
+              <li>每一行只可以写一个产生式，并且不能有空行</li>
+              <li>不要写结束标记</li>
+            </ul>
+            <textarea id="grammar-text" placeholder="grammar"></textarea>
+            <p>
+              <button type="button" id="create-parser" onclick="createGrammer()">Create Parser</button>
+              <button type="button" id="show-example" onclick="showExample()">Show an Example</button>
+              <button type="reset" id="clear" onclick="clearGrammer()">Clear</button>
+            </p>
+            <div id="grammar-container" class="container code-container"></div>
+        </section>
+    
+        <section>
+            <h3>项目集</h3>
+            <div id="collection-container" class="container code-container"></div>
+        </section>
+        
+        <section>
+            <h3>分析表</h3>
+            <div id="parse-table-container" class="container table-container">
+                <table id="parse-table" class="parse-table"><caption>分析表</caption>
+                    <tr><th rowspan="2">状态</td><th id="table-actions">动作</th><th id="table-trans">转移</th></tr>
+                    <tr id="table-col-item"></tr>
+                </table>
+            </div>
+        </section>
+        
+        <section>
+            <h2>分析</h2>
+            <p>如何输入：</p>
+            <ul>
+                <li>每一次只允许输入一个式子</li>
+            </ul>
+            <textarea id="parse-text" placeholder="input"></textarea>
+            <p>
+                <button type="button" id="parse" onclick="">单步演示</button>
+                <button type="button" id="parse" onclick="createParseText()">查看分析结果</button>
+            </p>
+        </section>
+        
+        <section>
+            <h3>分析步骤</h3>
+            <div id="parse-steps-container" class="container table-container"></div>
+            </section>
+            <section>
+            <h3>状态转换图</h3> 
+            <div id="parse-tree-container" class="container tree-container"></div>
+        </section>
+    </main>
+    <footer>
+        <p>
+            页脚
+        </p>
+    </footer>
+</body>
+</html>
