@@ -24,9 +24,9 @@
             </ul>
             <textarea id="grammar-text" placeholder="grammar"></textarea>
             <p>
-              <button type="button" id="create-parser" onclick="createGrammer()">Create Parser</button>
-              <button type="button" id="show-example" onclick="showExample()">Show an Example</button>
-              <button type="reset" id="clear" onclick="clearGrammer()">Clear</button>
+              <button type="button" id="create-parser" onclick="createGrammer()">创一个LR(1)分析器</button>
+              <button type="button" id="show-example" onclick="showExample()">展示一个示例</button>
+              <button type="reset" id="clear" onclick="clearGrammer()">清空</button>
             </p>
             <div id="grammar-container" class="container code-container"></div>
         </section>
@@ -52,10 +52,11 @@
             <ul>
                 <li>每一次只允许输入一个式子</li>
             </ul>
-            <textarea id="parse-text" placeholder="input"></textarea>
+            <textarea id="parse-text" placeholder="input" onchange="parseTextChange()"></textarea>
             <p>
-                <button type="button" id="parse" onclick="">单步演示</button>
-                <button type="button" id="parse" onclick="createParseText()">查看分析结果</button>
+                <button type="button" id="parse" onclick="parseTextOneStep()">单步演示</button>
+                <button type="button" id="parse" onclick="showAllParseStep()">一键查看分析结果</button>
+                <button type="button" id="parse" onclick="clearParseText()">清空</button>
             </p>
         </section>
         
@@ -65,7 +66,7 @@
             </section>
             <section>
             <h3>状态转换图</h3> 
-            <div id="parse-tree-container" class="container tree-container"></div>
+            <div id="parse-state-container" class="container state-container"></div>
         </section>
     </main>
     <footer>

@@ -103,8 +103,12 @@ th{
     text-align: center;
 }
 
-#parse-steps-container td:nth-child(2){
+#parse-steps-container td:nth-child(3){
     text-align: right;
+}
+
+#parse-steps-container td:nth-child(1){
+    text-align: center;
 }
 
 #parse-steps-container td{
@@ -191,4 +195,12 @@ button:hover { background:#497fd6; }
 
 ul {
     margin: 10px;
+}
+
+tr.current-step{
+    background-color: #0fe6337c
+}
+
+tr.error-step{
+    background-color: rgba(250, 58, 58, 0.651);
 }

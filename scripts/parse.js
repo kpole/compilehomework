@@ -401,6 +401,7 @@ function getDepth(){
     let depth = new Array(items.length);
     let deg = new Array(items.length);
     let queue = new Array();
+    let list = new Array();
     for(let i=0;i<depth.length;i++) depth[i] = -1,deg[i] = 0;
     for(let i=0;i<depth.length;i++){
         if(edges[i] != undefined)
@@ -414,6 +415,7 @@ function getDepth(){
     // console.log(edges);
     while(queue.length){
         let x = queue.shift();
+        list.push(x);
         if(edges[x] == undefined) continue;
         for(let item of edges[x]){ 
             if(item.ver == x) continue;
@@ -423,5 +425,5 @@ function getDepth(){
             }
         }
     }
-    return depth;
+    return [depth, list];
 }
