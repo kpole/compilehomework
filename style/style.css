@@ -224,9 +224,9 @@ tr.error-step{
     position: absolute;
     height: 100px;
     width: 100px;
-    border: 8px solid;
-    border-color: rgba(23, 102, 247, 0.747);
-    border-radius: 10%;
+    border: 5px solid;
+    border-color: rgba(39, 108, 236, 0.527);
+    border-radius: 12px;
     /* line-height: 50px; */
 }
 
@@ -243,4 +243,11 @@ pre.item-node{
 .item-node-label-font{
     font-weight: bold;
     font-size: 18px;
+    color: rgb(0, 102, 255);
+}
+
+table caption{
+    font-size: 22px;
+    margin: 10px;
+    font-weight: bold;
 }

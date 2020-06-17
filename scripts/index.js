@@ -324,9 +324,9 @@ function changeStateDiagram(){
     if(curIndex > 0) {
         let pastStateIndex = getLastNumber(parse_step[curIndex-1][0]);
         // console.log("past" + pastStateIndex);
-        document.getElementById("item_" + pastStateIndex).classList.remove("item-current");
+        document.getElementById("item_" + total+ pastStateIndex).classList.remove("item-current");
     }
-    document.getElementById("item_" + curStateIndex).classList.add("item-current");
+    document.getElementById("item_" + total+ curStateIndex).classList.add("item-current");
 }
 
 // 单步演示的每一步
@@ -393,9 +393,6 @@ function showExample(){
     parse_step = "";
     showAllParseStep();
 }
-
-
-
 
 window.onload = function(){
 }
