@@ -57,17 +57,20 @@
             </ul>
             <textarea id="parse-text" placeholder="input" onchange="parseTextChange()"></textarea>
             <p>
-                <button type="button" id="parse" onclick="parseTextOneStep()">单步演示</button>
-                <button type="button" id="parse" onclick="showAllParseStep()">一键查看分析结果</button>
-                <button type="button" id="parse" onclick="clearParseText()">清空</button>
+                <button type="button" onclick="parseTextOneStep()">单步演示</button>
+                <button type="button" onclick="showAllParseStep()">一键查看分析结果</button>
+                <button type="button" onclick="clearParseText()">清空</button>
             </p>
         </section>
         
         <section>
             <h3>分析步骤</h3>
             <div id="parse-steps-container" class="container table-container"></div>
-            </section>
-            <section>
+            <p>
+                <button type="button" onclick="parseTextOneStep()">单步演示</button>
+            </p>
+        </section>
+        <section>
             <h3>状态转换图</h3> 
             <div id="parse-state-container" class="container state-container"></div>
         </section>
