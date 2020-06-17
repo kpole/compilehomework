@@ -29,7 +29,7 @@ function addItemContentToItemNode(divNode, index){
 
 function drawStateDiagram(){
     let container = document.getElementById("parse-state-container");
-    while(container.children.size > 0) container.lastChild.remove();
+    container.innerHTML = "";
     container.style.width = "100%";
     total ++;
     let itemCounts = items.length;
