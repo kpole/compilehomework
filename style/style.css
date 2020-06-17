@@ -197,8 +197,16 @@ ul {
     margin: 10px;
 }
 
-tr.current-step{
-    background-color: #0fe6337c
+tr.accept-step{
+    background-color: rgba(171, 245, 171, 0.80);
+}
+
+tr.reduce-step{
+    background-color: rgba(221,204,255, 0.80);
+}
+
+tr.shift-step{
+    background-color: rgba(204,221,255, 0.80);
 }
 
 tr.error-step{

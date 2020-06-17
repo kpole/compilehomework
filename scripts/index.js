@@ -244,11 +244,15 @@ function addItemToParseSetp(table, strArr, index){
     let tr = document.createElement("tr");
     tr.appendChild(element("td", index));
     // console.log(strArr);
+    if(strArr[2] == "Error")
+        tr.className = "error-step";
+    else if(strArr[2] == "移进")
+        tr.className = "shift-step";
+    else if(strArr[2] == "接受")
+        tr.className = "accept-step";
+    else if(strArr[2][0] == "按")
+        tr.className = "reduce-step";
     for(let item of strArr){
-        if(item == '接受')
-            tr.className = "current-step";
-        else if(item == 'Error') 
-            tr.className = "error-step";
         tr.appendChild(element("td", item));
     }
     table.appendChild(tr);
@@ -290,20 +294,21 @@ function showAllParseStep(){
 // 单步演示的每一步
 function showOneStepOfParse(){
     if(curIndex >= parse_step.length){
-        document.getElementById("parse-steps").children[parse_step.length].className = "";
         alert("单步演示已经结束！如需重新演示请点击“清空”按钮");
         return;
     }
-    if(curIndex != 0){
-        document.getElementById("parse-steps").children[curIndex].className = "";
-    }
+
     let tr = document.getElementById("parse-steps").children[curIndex + 1];
     
     let strArr = parse_step[curIndex];
     if(strArr[2] == "Error")
         tr.className = "error-step";
+    else if(strArr[2] == "移进")
+        tr.className = "shift-step";
+    else if(strArr[2] == "接受")
+        tr.className = "accept-step";
     else 
-        tr.className = "current-step";
+        tr.className = "reduce-step";
     for(let i = 0; i < strArr.length;i++){
        tr.children[i+1].innerHTML = strArr[i]; 
     }
