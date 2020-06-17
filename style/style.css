@@ -161,7 +161,7 @@ td.error {
 
 i {
     display: inline-block;
-    min-width: 3em;
+    min-width: 2em;
     text-align: right;
     color: gray;
 }
@@ -211,4 +211,36 @@ tr.shift-step{
 
 tr.error-step{
     background-color: rgba(250, 58, 58, 0.651);
+}
+
+.state-container{
+    padding: 20px;
+    width: 80%;
+    border: 1px solid gray;
+    position: relative;
+}
+
+.item {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    border: 8px solid;
+    border-color: rgba(23, 102, 247, 0.747);
+    border-radius: 10%;
+    /* line-height: 50px; */
+}
+
+.item-current {
+    border-color: rgba(19, 226, 19, 0.527);
+}
+
+pre.item-node{
+    margin: 0;
+    margin-top: 5px;
+    line-height: 1.15;
+}
+
+.item-node-label-font{
+    font-weight: bold;
+    font-size: 18px;
 }

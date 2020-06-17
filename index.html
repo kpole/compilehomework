@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script src="https://cdn.bootcss.com/jsPlumb/2.6.8/js/jsplumb.min.js"></script>
     <script type="text/javascript" src="scripts/parse.js"></script>
     <script type="text/javascript" src="scripts/index.js"></script>
+    <script type="text/javascript" src="scripts/drawstatediagram.js"></script>
     <title>LR(1)</title>
 </head>
 <body>
@@ -17,14 +19,15 @@
             <h2>文法</h2>
             <p>如何编写文法：</p>
             <ul>
-              <li>第一个符号必须是开始符</li>
-              <li>产生式左部和右部之间使用"->"隔开，'ε'使用'@'代替</li>
-              <li>每一行只可以写一个产生式，并且不能有空行</li>
-              <li>不要写结束标记</li>
+                <li>输入的文法必须是拓广文法</li>
+                <li>第一个符号必须是开始符</li>
+                <li>产生式左部和右部之间使用"->"隔开，'ε'使用'@'代替</li>
+                <li>每一行只可以写一个产生式，并且不能有空行</li>
+                <li>不要写结束标记</li>
             </ul>
             <textarea id="grammar-text" placeholder="grammar"></textarea>
             <p>
-              <button type="button" id="create-parser" onclick="createGrammer()">创一个LR(1)分析器</button>
+              <button type="button" id="create-parser" onclick="createGrammer()">创建一个LR(1)分析器</button>
               <button type="button" id="show-example" onclick="showExample()">展示一个示例</button>
               <button type="reset" id="clear" onclick="clearGrammer()">清空</button>
             </p>

@@ -142,6 +142,7 @@ function createParseTable(){
     symbols = [];
     NT_productions = [];
     firstCollection = [];
+    parse_step = [];
     actions = new Map();
     trans = new Map();  
     this.getSymbols();
@@ -226,11 +227,22 @@ function createGrammer(){
 
 // 清空语法分析器
 function clearGrammer(){
+    edges = [];
+    items = [];
+    productions = [];
+    Terminal = [];
+    Nonterminal = [];
+    symbols = [];
+    NT_productions = [];
+    firstCollection = [];
+    parse_step = [];
+    actions = new Map();
+    trans = new Map(); 
     document.getElementById("grammar-text").value = '';
     document.getElementById('grammar-container').innerHTML='';
     document.getElementById('collection-container').innerHTML='';
     document.getElementById('parse-steps-container').innerHTML='';
-    document.getElementById('parse-tree-container').innerHTML='';
+    document.getElementById('parse-state-container').innerHTML='';
     document.getElementById("parse-text").value = '';
     let table = document.getElementById("parse-table");
     while(table.childElementCount > 2){
@@ -281,7 +293,7 @@ function showAllParseStep(){
     tr.appendChild(element("th", "输入"));
     tr.appendChild(element("th", "动作",undefined,{"width":"200px"}));
     table.appendChild(tr);
-    console.log(parse_step);
+    // console.log(parse_step);
     for(let i = 0; i < parse_step.length;i++){
         addItemToParseSetp(table, parse_step[i], i);
     }
@@ -291,15 +303,41 @@ function showAllParseStep(){
     // console.log(getDepth());
 }
 
+function getLastNumber(str){
+    // console.log(str);
+    let res = 0, cur = 1;
+    for(let i = str.length-2;i>=0;i--){
+        if(str[i] == ' ') break;
+        res += (str[i] - '0') * cur;
+        cur *= 10;
+    }
+    return res;
+}
+
+
+
+function changeStateDiagram(){
+    // console.log(curIndex);
+    // console.log(parse_step[curIndex]);
+    let curStateIndex = getLastNumber(parse_step[curIndex][0]);
+    // console.log("cur" + curStateIndex);
+    if(curIndex > 0) {
+        let pastStateIndex = getLastNumber(parse_step[curIndex-1][0]);
+        // console.log("past" + pastStateIndex);
+        document.getElementById("item_" + pastStateIndex).classList.remove("item-current");
+    }
+    document.getElementById("item_" + curStateIndex).classList.add("item-current");
+}
+
 // 单步演示的每一步
 function showOneStepOfParse(){
     if(curIndex >= parse_step.length){
         alert("单步演示已经结束！如需重新演示请点击“清空”按钮");
         return;
     }
-
+    changeStateDiagram();
     let tr = document.getElementById("parse-steps").children[curIndex + 1];
-    
+
     let strArr = parse_step[curIndex];
     if(strArr[2] == "Error")
         tr.className = "error-step";
@@ -314,6 +352,7 @@ function showOneStepOfParse(){
     }
     curIndex ++;
 }
+
 
 
 // 点击页面“单步演示”按钮触发该函数
@@ -341,6 +380,7 @@ function parseTextOneStep(){
 // 点击页面“清空”按钮触发该函数
 function clearParseText(){
     document.getElementById("parse-steps-container").innerHTML = '';
+    document.getElementById("parse-text").value = '';
     parse_step = "";
     curIndex = 0;
 }
@@ -354,118 +394,8 @@ function showExample(){
     showAllParseStep();
 }
 
-//绘制圆形
-//canvasid画布名称,x,y 坐标,radius 半径,maxValue最大值,process 百分比,backColor 中心颜色, proColor 进度颜色, fontColor 中心文字颜色,fonttitle中心文字内容，unit中心文字单位
-function DrawCircle(canvas, x, y, radius, maxValue, process, backColor, proColor, fontColor, fonttitle) {
-    if (canvas.getContext) {
-        var cts = canvas.getContext('2d');
-    } else {
-        return;
-    }
-    cts.beginPath();
-    // 坐标移动到圆心  
-    cts.moveTo(x, y);
-    // 画圆,圆心是24,24,半径24,从角度0开始,画到2PI结束,最后一个参数是方向顺时针还是逆时针  
-    cts.arc(x, y, radius, 0, Math.PI * 2, false);
-    cts.closePath();
-    // 填充颜色  
-    cts.fillStyle = backColor;
-    cts.fill();
-
-    cts.beginPath();
-    // 画扇形的时候这步很重要,画笔不在圆心画出来的不是扇形  
-    cts.moveTo(x, y);
-    // 跟上面的圆唯一的区别在这里,不画满圆,画个扇形  
-    //cts.arc(x, y, radius, Math.PI * 1.5, Math.PI * 1.5 - Math.PI * 2 * process / maxValue, true);
-    cts.closePath();
-    cts.fillStyle = proColor;
-    cts.fill();
-
-    //填充背景白色
-    cts.beginPath();
-    cts.moveTo(x, y);
-    cts.arc(x, y, radius - (radius * 0.10), 0, Math.PI * 2, true);
-    cts.closePath();
-    cts.fillStyle = 'rgba(255,255,255,1)';
-    cts.fill();
-
-    // 画一条线  
-    cts.beginPath();
-    //cts.arc(x, y, radius - (radius * 0.30), 0, Math.PI * 2, true);
-    cts.closePath();
-    // 与画实心圆的区别,fill是填充,stroke是画线  
-    cts.strokeStyle = backColor;
-    cts.stroke();
-
-    //在中间写字 
-    cts.font = "bold 15pt Arial";
-    cts.fillStyle = fontColor;
-    cts.textAlign = 'center';
-    cts.textBaseline = 'middle';
-    cts.moveTo(x, y);
-    cts.fillText(fonttitle, x, y);
-}
-
-// 画图， 起点和终点（二维数组）， 线宽，线的颜色，线上面的字符
-function DrawLine(canvas, begin_point, end_point, lineWidth, strokeStyle, text, textSize, textFamily){
-    // console.log(begin_point);
-    // console.log(end_point);
-    let ctx = canvas.getContext("2d");
-    ctx.beginPath();
-    // 5, gray
-    ctx.lineWidth = lineWidth;
-    ctx.strokeStyle = strokeStyle;
-    ctx.moveTo(begin_point[0], begin_point[1]);
-    ctx.lineTo(end_point[0], end_point[1]);
-    ctx.stroke();
-    ctx.closePath();
-    // ctx.font = "30px Georgia";
-    ctx.font = textSize + " " + textFamily;
-    ctx.fillText(text, begin_point[0] + 3 * (end_point[0] - begin_point[0]) / 8, begin_point[1] + 3 * (end_point[1] - begin_point[1]) / 8);
-}
 
 
-/*
-    拓扑序
-*/
-function drawStateDiagram(){
-    let container = document.getElementById("parse-state-container");
-    container.innerHTML = "";
-    let canvas = document.createElement("canvas");
-    let itemCounts = items.length;
-    let item = getDepth();
-    let depth = item[0]; // 每个点的depth
-    let list = item[1]; // 拓扑序排序之后
-    let corrdinate = new Array(itemCounts);
-    let colNum = new Array(itemCounts);
-    // console.log(depth);
-    // console.log(list);
-    for(let i = 0; i < itemCounts; i++)colNum[i] = 0;
-    for(let i = 0; i < itemCounts; i ++){
-        let id = list[i];
-        let x = depth[id];
-        let y = colNum[x] ++;
-        corrdinate[id] = [x * 200 + 100, y * 200 + 100];
-    }
-    console.log(corrdinate);
-    // console.log(Math.max(...depth));
-    // console.log(Math.max(...colNum));
-    canvas.width = Math.max(...depth) * 200 + 200;
-    canvas.height = Math.max(...colNum) * 200 + 200;
-    // 按照拓扑序去画？对！，生成过程也是，
-    DrawCircle(canvas, 100, 100, 50, 30, 15, '#ddd', '#32CD32', '#32CD32', 0);
-    // console.log(corrdinate);
-    for(let i = 0; i < itemCounts; i ++){
-        let stpoint = corrdinate[i];
-        if(edges[i] != undefined){
-            for(let edge of edges[i]){
-                let edpoint = corrdinate[edge.ver];
-                DrawCircle(canvas, edpoint[0], edpoint[1], 50, 30, 15, '#ddd', '#32CD32', '#32CD32', edge.ver);
-                DrawLine(canvas, [stpoint[0] + 50, stpoint[1]], [edpoint[0] - 50, edpoint[1]], "5px", "gray", edge.symbol, "30px", "Georgia");      
-            }
-        }
-    }
-    // console.log(corrdinate);
 
-    container.appendChild(canvas);
+window.onload = function(){
 }
