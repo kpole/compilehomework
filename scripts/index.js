@@ -284,7 +284,7 @@ function showAllParseStep(){
     // if(value == '') return;
     // parse_step = analysis(value);
     if(parse_step == undefined ||  parse_step == '') parseTextChange();
-    if(parse_step == undefined) return;
+    if(parse_step == undefined || parse_step == '') return;
     let table = document.createElement("table");
     table.id = "parse-steps";
     let tr = document.createElement("tr");
@@ -317,13 +317,9 @@ function getLastNumber(str){
 
 
 function changeStateDiagram(){
-    // console.log(curIndex);
-    // console.log(parse_step[curIndex]);
     let curStateIndex = getLastNumber(parse_step[curIndex][0]);
-    // console.log("cur" + curStateIndex);
     if(curIndex > 0) {
         let pastStateIndex = getLastNumber(parse_step[curIndex-1][0]);
-        // console.log("past" + pastStateIndex);
         document.getElementById("item_" + total+ pastStateIndex).classList.remove("item-current");
     }
     document.getElementById("item_" + total+ curStateIndex).classList.add("item-current");
@@ -358,7 +354,7 @@ function showOneStepOfParse(){
 // 点击页面“单步演示”按钮触发该函数
 function parseTextOneStep(){
     if(parse_step == undefined ||  parse_step == '') parseTextChange();
-    if(parse_step == undefined) return;
+    if(parse_step == undefined || parse_step == '') return;
     if(curIndex == 0){
         let table = document.createElement("table");
         table.id = "parse-steps";
@@ -381,6 +377,8 @@ function parseTextOneStep(){
 function clearParseText(){
     document.getElementById("parse-steps-container").innerHTML = '';
     document.getElementById("parse-text").value = '';
+    let pastStateIndex = getLastNumber(parse_step[curIndex][0]);
+    document.getElementById("item_" + total+ pastStateIndex).classList.remove("item-current");
     parse_step = "";
     curIndex = 0;
 }

@@ -1,4 +1,5 @@
 total = 0;
+// 将项目内容添加到divNode中
 function addItemContentToItemNode(divNode, index){
     let preNode = document.createElement('pre');
     preNode.className = "item-node";
@@ -26,7 +27,7 @@ function addItemContentToItemNode(divNode, index){
     divNode.style.width = (MaxLength + 6) * 30 + "px";
     divNode.style.height = (set.size) * 24 + 5 + "px";
 }
-
+// 创建div
 function drawStateDiagram(){
     let container = document.getElementById("parse-state-container");
     container.innerHTML = "";
@@ -37,10 +38,6 @@ function drawStateDiagram(){
     let depth = temp[0]; // 每个点的depth
     let list = temp[1]; // 拓扑序排序之后
     let colNum = new Array(itemCounts);
-    // console.log(edges);
-    // console.log(depth);
-    // console.log(items);
-    // console.log(list);
 
     for(let i = 0; i < itemCounts; i++)colNum[i] = 0;
     for(let i = 0; i < itemCounts; i ++){
@@ -60,7 +57,7 @@ function drawStateDiagram(){
     container.style.height = Math.max(...colNum) * 350 + "px";
     drawStateLine();
 }
-
+// 绘制边
 function drawStateLine(){
     let itemCounts = items.length;
     jsPlumb.ready(function () {
